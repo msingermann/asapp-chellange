@@ -18,6 +18,9 @@ public class ImageMessageContent extends MessageContent {
             @JsonProperty("width") int width) {
         super(MessageContentTypes.IMAGE.name());
         metadata = new HashMap<>();
+
+        //TODO validate url
+
         metadata.put("url", url);
         metadata.put("height", height);
         metadata.put("width", width);

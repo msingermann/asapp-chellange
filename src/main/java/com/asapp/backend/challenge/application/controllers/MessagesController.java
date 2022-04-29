@@ -2,7 +2,6 @@ package com.asapp.backend.challenge.application.controllers;
 
 import com.asapp.backend.challenge.application.model.requests.SendMessageRequest;
 import com.asapp.backend.challenge.application.model.responses.CreateMessageResponse;
-import com.asapp.backend.challenge.application.resources.HealthResource;
 import com.asapp.backend.challenge.application.services.MessagesService;
 import com.asapp.backend.challenge.application.utils.Path;
 import org.slf4j.Logger;

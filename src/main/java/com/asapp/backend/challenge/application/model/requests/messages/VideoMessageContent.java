@@ -17,6 +17,9 @@ public class VideoMessageContent extends MessageContent {
             @JsonProperty("source") String source) {
         super(MessageContentTypes.VIDEO.name());
         metadata = new HashMap<>();
+
+        //TODO validate url
+
         metadata.put("url", url);
         metadata.put("source", source);
     }

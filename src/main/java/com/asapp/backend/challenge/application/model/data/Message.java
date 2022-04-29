@@ -2,16 +2,12 @@ package com.asapp.backend.challenge.application.model.data;
 
 import com.asapp.backend.challenge.application.utils.MapToJsonConverter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.type.BlobType;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -50,7 +46,7 @@ public class Message {
         this.sender = sender;
         this.recipient = recipient;
         this.type = type;
-        this.metadata = MapToJsonConverter.convertToDatabaseColumn(metadata);
+        this.metadata = MapToJsonConverter.convertMapToJsonString(metadata);
     }
 
     public int getId() {
@@ -86,11 +82,11 @@ public class Message {
     }
 
     public Map<String, Object> getMetadata() {
-        return MapToJsonConverter.convertToEntityAttribute(metadata);
+        return MapToJsonConverter.convertJsonStringtoMap(metadata);
     }
 
     public void setMetadata(Map<String, Object> metadata) {
-        this.metadata = MapToJsonConverter.convertToDatabaseColumn(metadata);
+        this.metadata = MapToJsonConverter.convertMapToJsonString(metadata);
     }
 
     public Date getTimestamp() {

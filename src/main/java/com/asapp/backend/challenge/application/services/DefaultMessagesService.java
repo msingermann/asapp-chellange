@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DefaultMessagesService implements MessagesService {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMessagesService.class);
 
     private MessagesRepository messagesRepository;
@@ -25,6 +26,7 @@ public class DefaultMessagesService implements MessagesService {
         MessageContent content = sendMessageRequest.getContent();
         Message message = new Message(sendMessageRequest.getSender(), sendMessageRequest.getRecipient(), content.getType(), content.getMetadata());
         Message persistedMessage = messagesRepository.save(message);
+        LOGGER.debug("Persisted Message id: %s. From user: %s to user: %s.", persistedMessage.getId(), persistedMessage.getSender(), persistedMessage.getRecipient());
         return new CreateMessageResponse(persistedMessage.getId(), persistedMessage.getTimestamp());
     }
 }

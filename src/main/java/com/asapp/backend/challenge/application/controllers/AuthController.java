@@ -27,7 +27,6 @@ public class AuthController {
     @RequestMapping(value = Path.LOGIN, method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         LOGGER.debug("Login request received.");
-
         LoginResponse response = authService.login(loginRequest);
         return ResponseEntity.ok().body(response);
     }
