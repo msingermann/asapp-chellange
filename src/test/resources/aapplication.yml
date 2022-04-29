@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:sqlite::memory:}
+    username: ${DATABASE_USERNAME:user}
+    password: ${DATABASE_PASSWORD:pass}
+    hikari:
+      auto-commit: false
+      maximum-pool-size: 1
+      max-lifetime: 0
