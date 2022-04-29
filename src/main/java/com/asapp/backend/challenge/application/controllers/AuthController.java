@@ -24,6 +24,12 @@ public class AuthController {
         this.authService = authService;
     }
 
+    /**
+     * Login Endpoint to fetch an authorization token.
+     *
+     * @param loginRequest {@link LoginRequest}.
+     * @return {@link LoginResponse}.
+     */
     @RequestMapping(value = Path.LOGIN, method = RequestMethod.POST)
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         LOGGER.debug("Login request received.");

@@ -14,6 +14,11 @@ public class HealthController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HealthController.class);
 
+    /**
+     * Health check endpoint.
+     *
+     * @return {@link HealthResource}.
+     */
     @RequestMapping(value = Path.HEALTH, method = RequestMethod.POST)
     public ResponseEntity<HealthResource> getHealth() {
         LOGGER.debug("Health Check request received.");

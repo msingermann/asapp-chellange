@@ -24,6 +24,12 @@ public class MessagesController {
         this.messagesService = messagesService;
     }
 
+    /**
+     * Creates a new Message.
+     *
+     * @param sendMessageRequest {@link SendMessageRequest}.
+     * @return {@link CreateMessageResponse}.
+     */
     @RequestMapping(value = Path.MESSAGES, method = RequestMethod.POST)
     public ResponseEntity<CreateMessageResponse> sendMessage(@RequestBody SendMessageRequest sendMessageRequest) {
         LOGGER.debug("Send message request received.");

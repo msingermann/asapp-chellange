@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class UsersController {
@@ -27,8 +26,14 @@ public class UsersController {
         this.usersService = usersService;
     }
 
+    /**
+     * Creates a new User.
+     *
+     * @param createUserRequest User creation request.
+     * @return {@link CreateUserResponse}.
+     */
     @RequestMapping(value = Path.USERS, method = RequestMethod.POST)
-    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest createUserRequest) throws ResponseStatusException {
+    public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest createUserRequest) {
         LOGGER.debug("Create Users request received.");
         User user = usersService.createUser(createUserRequest.getName(), createUserRequest.getPassword());
         return ResponseEntity.ok().body(UsersTransformer.transform(user));
