@@ -5,9 +5,25 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
+/**
+ * Repository to manage Users.
+ */
 public interface UsersRepository extends CrudRepository<User, Integer> {
 
-    public Optional<User> findByNameAndPassword(String name, String password);
-    public Optional<User> findByName(String name);
-//    CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(255) NOT NULL,password varchar(255));
+    /**
+     * Finds users by name and password to check if password is correct.
+     *
+     * @param name     User name.
+     * @param password User password.
+     * @return Optional of User. Empty if not present or password is not matched.
+     */
+    Optional<User> findByNameAndPassword(String name, String password);
+
+    /**
+     * Finds users by Name to check if the name is taken.
+     *
+     * @param name User name.
+     * @return Returns a user if the name is taken.
+     */
+    Optional<User> findByName(String name);
 }

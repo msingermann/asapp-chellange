@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 public class DefaultMessagesService implements MessagesService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMessagesService.class);
-
     private MessagesRepository messagesRepository;
 
     @Autowired
@@ -22,6 +21,9 @@ public class DefaultMessagesService implements MessagesService {
         this.messagesRepository = messagesRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public CreateMessageResponse sendMessage(SendMessageRequest sendMessageRequest) {
         MessageContent content = sendMessageRequest.getContent();
         Message message = new Message(sendMessageRequest.getSender(), sendMessageRequest.getRecipient(), content.getType(), content.getMetadata());

@@ -1,7 +1,6 @@
 package com.asapp.backend.challenge.application.filter;
 
 import com.asapp.backend.challenge.application.exceptions.UnauthorizedException;
-import com.asapp.backend.challenge.application.services.DefaultAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Token Validation Filter.
+ */
 public class TokenValidatorFilter extends OncePerRequestFilter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TokenValidatorFilter.class);

@@ -11,25 +11,25 @@ import java.io.IOException;
 import java.util.Map;
 
 public class MapToJsonConverter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MapToJsonConverter.class);
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MapToJsonConverter.class);
     private final static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static String convertMapToJsonString(Map<String, Object> meta) {
+    public static String convertMapToJsonString(Map<String, Object> metadata) {
         try {
-            return objectMapper.writeValueAsString(meta);
+            return objectMapper.writeValueAsString(metadata);
         } catch (JsonProcessingException e) {
             LOGGER.error("Failed to parse Map to Json", e);
             throw new MetadataParsingException();
         }
     }
 
-    public static Map<String, Object> convertJsonStringtoMap(String dbData) {
+    public static Map<String, Object> convertJsonStringtoMap(String metadataAsString) {
         try {
-            return objectMapper.readValue(dbData, new TypeReference<>() {
+            return objectMapper.readValue(metadataAsString, new TypeReference<>() {
             });
         } catch (IOException e) {
-            LOGGER.error("Failed to parse Json from DB. content: %s",dbData, e);
+            LOGGER.error("Failed to parse Json from DB. content: %s", metadataAsString, e);
             throw new MetadataParsingException();
         }
     }

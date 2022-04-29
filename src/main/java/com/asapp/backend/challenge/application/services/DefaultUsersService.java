@@ -15,7 +15,6 @@ import java.util.Optional;
 public class DefaultUsersService implements UsersService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultUsersService.class);
-
     private UsersRepository usersRepository;
 
     @Autowired
@@ -23,6 +22,9 @@ public class DefaultUsersService implements UsersService {
         this.usersRepository = usersRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional
     public User createUser(String name, String password) {
         Optional<User> previousUserWithThatName = usersRepository.findByName(name);

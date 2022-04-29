@@ -14,26 +14,47 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.Map;
 
+/**
+ * Message entity.
+ */
 @Entity
 @Table(name = "messages")
 public class Message {
 
+    /**
+     * Message Id.
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * Message Sender Id.
+     */
     @Column(name = "sender", nullable = false)
     private int sender;
 
+    /**
+     * Message Recipient Id.
+     */
     @Column(name = "recipient", nullable = false)
     private int recipient;
 
+    /**
+     * Message Content type {@link com.asapp.backend.challenge.application.model.MessageContentTypes}.
+     */
     @Column(name = "type", nullable = false)
     private String type;
 
+    /**
+     * Content metadata.
+     */
     @Column(name = "metadata", nullable = false)
     private String metadata;
 
+    /**
+     * Creation date.
+     */
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "timestamp")

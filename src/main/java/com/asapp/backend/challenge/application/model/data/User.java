@@ -7,17 +7,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * User entity.
+ */
 @Entity
 @Table(name = "users")
 public class User {
 
+    /**
+     * User Id.
+     */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * User Name (must be unique).
+     */
     @Column(name = "name", nullable = false)
     private String name;
 
+    /**
+     * User Password Hashed.
+     */
     @Column(name = "password", nullable = false)
     private String password;
 

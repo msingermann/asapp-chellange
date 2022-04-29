@@ -20,5 +20,4 @@ public class HealthController {
         return ResponseEntity.ok().body(new HealthResource("OK"));
     }
 
-
 }

@@ -20,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class UsersController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UsersController.class);
-
     private final UsersService usersService;
 
     @Autowired

@@ -17,7 +17,6 @@ import java.util.UUID;
 public class DefaultAuthService implements AuthService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAuthService.class);
-
     private UsersRepository usersRepository;
 
     @Autowired
@@ -25,6 +24,9 @@ public class DefaultAuthService implements AuthService {
         this.usersRepository = usersRepository;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public LoginResponse login(LoginRequest loginRequest) {
         Optional<User> maybeUser = usersRepository.findByNameAndPassword(loginRequest.getName(), loginRequest.getPassword());
         if (maybeUser.isEmpty() || !maybeUser.get().getPassword().equals(loginRequest.getPassword())) {
