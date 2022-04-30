@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Message entity.
@@ -75,64 +74,24 @@ public class Message {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public long getSender() {
         return sender;
-    }
-
-    public void setSender(int sender) {
-        this.sender = sender;
     }
 
     public long getRecipient() {
         return recipient;
     }
 
-    public void setRecipient(int recipient) {
-        this.recipient = recipient;
-    }
-
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public Map<String, Object> getMetadata() {
         return MapToJsonConverter.convertJsonStringtoMap(metadata);
     }
 
-    public void setMetadata(Map<String, Object> metadata) {
-        this.metadata = MapToJsonConverter.convertMapToJsonString(metadata);
-    }
-
     public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Message message = (Message) o;
-        return id == message.id && sender == message.sender && recipient == message.recipient && Objects.equals(type, message.type) && Objects.equals(metadata, message.metadata) && Objects.equals(timestamp, message.timestamp);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, sender, recipient, type, metadata, timestamp);
-    }
 }

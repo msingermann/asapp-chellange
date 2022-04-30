@@ -30,7 +30,7 @@ public class DefaultAuthService implements AuthService {
     public LoginResponse login(LoginRequest loginRequest) {
         Optional<User> maybeUser = usersRepository.findByNameAndPassword(loginRequest.getName(), loginRequest.getPassword());
         if (maybeUser.isEmpty() || !maybeUser.get().getPassword().equals(loginRequest.getPassword())) {
-            LOGGER.debug("Login failed. Wrong user or password. User: %s, existis: %s", loginRequest.getName(), maybeUser.isPresent());
+            LOGGER.debug("Login failed. Wrong user or password. User: %s, exists: %s", loginRequest.getName(), maybeUser.isPresent());
             throw new LoginFailedException("Wrong User or Password");
         }
         //TODO generate login token and store maybe use an encrypted JWT?
