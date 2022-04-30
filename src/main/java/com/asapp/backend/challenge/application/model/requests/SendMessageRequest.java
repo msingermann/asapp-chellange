@@ -5,24 +5,24 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class SendMessageRequest {
 
-    private int sender;
+    private long sender;
 
-    private int recipient;
+    private long recipient;
 
     private MessageContent content;
 
     @JsonCreator
-    public SendMessageRequest(int sender, int recipient, MessageContent content) {
+    public SendMessageRequest(long sender, long recipient, MessageContent content) {
         this.sender = sender;
         this.recipient = recipient;
         this.content = content;
     }
 
-    public int getSender() {
+    public long getSender() {
         return sender;
     }
 
-    public int getRecipient() {
+    public long getRecipient() {
         return recipient;
     }
 

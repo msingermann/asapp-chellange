@@ -21,6 +21,8 @@ public class VideoMessageContent extends MessageContent {
         //TODO validate url
 
         metadata.put("url", url);
+
+        //TODO source should be a enum (youtube, vimeo)
         metadata.put("source", source);
     }
 

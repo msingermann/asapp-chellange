@@ -2,15 +2,15 @@ package com.asapp.backend.challenge.application.model.responses;
 
 public class LoginResponse {
 
-    private final int id;
+    private final long id;
     private final String token;
 
-    public LoginResponse(int id, String token) {
+    public LoginResponse(long id, String token) {
         this.id = id;
         this.token = token;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

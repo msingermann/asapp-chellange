@@ -1,7 +1,5 @@
 package com.asapp.backend.challenge.application.model.requests.messages;
 
-import com.asapp.backend.challenge.application.exceptions.ContentTypeNotAvailableException;
-import com.asapp.backend.challenge.application.model.MessageContentTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 

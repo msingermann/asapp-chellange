@@ -2,13 +2,13 @@ package com.asapp.backend.challenge.application.model.responses;
 
 public class CreateUserResponse {
 
-    private final int id;
+    private final long id;
 
-    public CreateUserResponse(int id) {
+    public CreateUserResponse(long id) {
         this.id = id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 }

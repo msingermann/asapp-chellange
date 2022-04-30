@@ -13,6 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Message entity.
@@ -26,19 +27,19 @@ public class Message {
      */
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     /**
      * Message Sender Id.
      */
     @Column(name = "sender", nullable = false)
-    private int sender;
+    private long sender;
 
     /**
      * Message Recipient Id.
      */
     @Column(name = "recipient", nullable = false)
-    private int recipient;
+    private long recipient;
 
     /**
      * Message Content type {@link com.asapp.backend.challenge.application.model.MessageContentTypes}.
@@ -63,14 +64,14 @@ public class Message {
     public Message() {
     }
 
-    public Message(int sender, int recipient, String type, Map<String, Object> metadata) {
+    public Message(long sender, long recipient, String type, Map<String, Object> metadata) {
         this.sender = sender;
         this.recipient = recipient;
         this.type = type;
         this.metadata = MapToJsonConverter.convertMapToJsonString(metadata);
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -78,7 +79,7 @@ public class Message {
         this.id = id;
     }
 
-    public int getSender() {
+    public long getSender() {
         return sender;
     }
 
@@ -86,7 +87,7 @@ public class Message {
         this.sender = sender;
     }
 
-    public int getRecipient() {
+    public long getRecipient() {
         return recipient;
     }
 
@@ -120,5 +121,18 @@ public class Message {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return id == message.id && sender == message.sender && recipient == message.recipient && Objects.equals(type, message.type) && Objects.equals(metadata, message.metadata) && Objects.equals(timestamp, message.timestamp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, sender, recipient, type, metadata, timestamp);
     }
 }
