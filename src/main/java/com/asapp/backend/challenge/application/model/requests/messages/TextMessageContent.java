@@ -1,6 +1,7 @@
 package com.asapp.backend.challenge.application.model.requests.messages;
 
 import com.asapp.backend.challenge.application.model.MessageContentTypes;
+import com.asapp.backend.challenge.application.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,4 +25,7 @@ public class TextMessageContent extends MessageContent {
         return metadata;
     }
 
+    @Override
+    public void validate() {
+    }
 }

@@ -27,4 +27,7 @@ public abstract class MessageContent {
     }
 
     public abstract Map<String, Object> getMetadata();
+
+    public abstract void validate();
+
 }

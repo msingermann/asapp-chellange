@@ -1,6 +1,7 @@
 package com.asapp.backend.challenge.application.model.requests.messages;
 
 import com.asapp.backend.challenge.application.model.MessageContentTypes;
+import com.asapp.backend.challenge.application.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -17,9 +18,6 @@ public class VideoMessageContent extends MessageContent {
             @JsonProperty("source") String source) {
         super(MessageContentTypes.VIDEO.name());
         metadata = new HashMap<>();
-
-        //TODO validate url
-
         metadata.put("url", url);
 
         //TODO source should be a enum (youtube, vimeo)
@@ -30,5 +28,10 @@ public class VideoMessageContent extends MessageContent {
     @Override
     public Map<String, Object> getMetadata() {
         return metadata;
+    }
+
+    @Override
+    public void validate() {
+        Utils.validateURI((String) metadata.get("url"));
     }
 }

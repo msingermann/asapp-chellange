@@ -37,6 +37,7 @@ public class MessagesController {
      */
     @RequestMapping(value = Path.MESSAGES, method = RequestMethod.POST)
     public ResponseEntity<CreateMessageResponse> sendMessage(@RequestBody SendMessageRequest sendMessageRequest) {
+        sendMessageRequest.getContent().validate();
         LOGGER.debug("Send message request received.");
         CreateMessageResponse response = messagesService.sendMessage(sendMessageRequest);
         return ResponseEntity.ok().body(response);

@@ -57,6 +57,42 @@ public class MessagesTests extends IntegrationTests {
     }
 
     @Test
+    public void sendMalformedVideoContent() {
+        User user1 = createUser("User1", "pass1");
+        User user2 = createUser("User2", "pass2");
+
+        String token = createToken(user1.getId());
+
+        String malformedURL = "malformedurl";
+
+        VideoMessageContent videoMessage = new VideoMessageContent(malformedURL, "youtube");
+
+        SendMessageRequest payload = new SendMessageRequest(user1.getId(), user2.getId(), videoMessage);
+
+        RestAssured.given().port(port).contentType(ContentType.JSON).given().header(HttpHeaders.AUTHORIZATION, token).body(payload).post(Path.MESSAGES).then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .and().body("message", is("no protocol: " + malformedURL));
+    }
+
+    @Test
+    public void sendMalformedImageContent() {
+        User user1 = createUser("User1", "pass1");
+        User user2 = createUser("User2", "pass2");
+
+        String token = createToken(user1.getId());
+
+        String malformedURL = "malformedurl";
+
+        ImageMessageContent imageMessage = new ImageMessageContent("malformedurl", 640, 480);
+
+        SendMessageRequest payload = new SendMessageRequest(user1.getId(), user2.getId(), imageMessage);
+
+        RestAssured.given().port(port).contentType(ContentType.JSON).given().header(HttpHeaders.AUTHORIZATION, token).body(payload).post(Path.MESSAGES).then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .and().body("message", is("no protocol: " + malformedURL));
+    }
+
+    @Test
     public void sendVideoMessage() {
         User user1 = createUser("User1", "pass1");
         User user2 = createUser("User2", "pass2");
