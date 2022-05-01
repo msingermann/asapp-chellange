@@ -1,7 +1,6 @@
 package com.asapp.backend.challenge.application.model.requests.messages;
 
 import com.asapp.backend.challenge.application.model.MessageContentTypes;
-import com.asapp.backend.challenge.application.utils.Utils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,7 +9,7 @@ import java.util.Map;
 
 public class TextMessageContent extends MessageContent {
 
-    private Map<String, Object> metadata;
+    private final Map<String, Object> metadata;
 
     @JsonCreator
     public TextMessageContent(

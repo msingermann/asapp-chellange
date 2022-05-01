@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class VideoMessageContent extends MessageContent {
 
-    private Map<String, Object> metadata;
+    private final Map<String, Object> metadata;
 
     @JsonCreator
     public VideoMessageContent(
@@ -19,8 +19,6 @@ public class VideoMessageContent extends MessageContent {
         super(MessageContentTypes.VIDEO.name());
         metadata = new HashMap<>();
         metadata.put("url", url);
-
-        //TODO source should be a enum (youtube, vimeo)
         metadata.put("source", source);
     }
 
@@ -33,5 +31,6 @@ public class VideoMessageContent extends MessageContent {
     @Override
     public void validate() {
         Utils.validateURI((String) metadata.get("url"));
+        VideoSource.resolve((String) metadata.get("source"));
     }
 }

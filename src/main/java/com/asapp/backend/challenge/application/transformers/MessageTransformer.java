@@ -1,8 +1,8 @@
 package com.asapp.backend.challenge.application.transformers;
 
 import com.asapp.backend.challenge.application.model.MessageContentTypes;
-import com.asapp.backend.challenge.application.model.dto.ImageMessageContentDTO;
 import com.asapp.backend.challenge.application.model.data.Message;
+import com.asapp.backend.challenge.application.model.dto.ImageMessageContentDTO;
 import com.asapp.backend.challenge.application.model.dto.MessageContentDTO;
 import com.asapp.backend.challenge.application.model.dto.MessageDTO;
 import com.asapp.backend.challenge.application.model.dto.TextMessageContentDTO;
@@ -12,7 +12,7 @@ public class MessageTransformer {
 
     public static MessageDTO transformToDTO(Message message) {
         MessageContentDTO content = null;
-        switch(MessageContentTypes.valueOf(message.getType())) {
+        switch (MessageContentTypes.valueOf(message.getType())) {
             case TEXT:
                 content = new TextMessageContentDTO(
                         (String) message.getMetadata().get("text"));

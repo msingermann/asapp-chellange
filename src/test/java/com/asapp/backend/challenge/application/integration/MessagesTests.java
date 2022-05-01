@@ -15,7 +15,6 @@ import org.springframework.http.HttpHeaders;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -47,7 +46,7 @@ public class MessagesTests extends IntegrationTests {
 
         String token = createToken(user1.getId());
 
-        ImageMessageContent imageMessage = new ImageMessageContent("http://urlloca.com", 640, 480);
+        ImageMessageContent imageMessage = new ImageMessageContent("http://youtube.com/video", 640, 480);
 
         SendMessageRequest payload = new SendMessageRequest(user1.getId(), user2.getId(), imageMessage);
         RestAssured.given().port(port).contentType(ContentType.JSON).given().header(HttpHeaders.AUTHORIZATION, token).body(payload).post(Path.MESSAGES).then()
@@ -75,6 +74,22 @@ public class MessagesTests extends IntegrationTests {
     }
 
     @Test
+    public void sendMessageWithBadVideoSource() {
+        User user1 = createUser("User1", "pass1");
+        User user2 = createUser("User2", "pass2");
+
+        String token = createToken(user1.getId());
+
+        VideoMessageContent videoMessage = new VideoMessageContent("http://youtube.com/video", "asdasd");
+
+        SendMessageRequest payload = new SendMessageRequest(user1.getId(), user2.getId(), videoMessage);
+
+        RestAssured.given().port(port).contentType(ContentType.JSON).given().header(HttpHeaders.AUTHORIZATION, token).body(payload).post(Path.MESSAGES).then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .and().body("message", is("Video source is not valid."));
+    }
+
+    @Test
     public void sendMalformedImageContent() {
         User user1 = createUser("User1", "pass1");
         User user2 = createUser("User2", "pass2");
@@ -99,7 +114,7 @@ public class MessagesTests extends IntegrationTests {
 
         String token = createToken(user1.getId());
 
-        VideoMessageContent videoMessage = new VideoMessageContent("http://urlloca.com", "youtube");
+        VideoMessageContent videoMessage = new VideoMessageContent("http://youtube.com/video", "youtube");
 
         SendMessageRequest payload = new SendMessageRequest(user1.getId(), user2.getId(), videoMessage);
         RestAssured.given().port(port).contentType(ContentType.JSON).given().header(HttpHeaders.AUTHORIZATION, token).body(payload).post(Path.MESSAGES).then()

@@ -18,7 +18,7 @@ public class User {
      * User Id.
      */
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
@@ -39,7 +39,7 @@ public class User {
         this.password = password;
     }
 
-    public User(){
+    public User() {
     }
 
     public long getId() {

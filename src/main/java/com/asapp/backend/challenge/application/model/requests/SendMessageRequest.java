@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class SendMessageRequest {
 
-    private long sender;
+    private final long sender;
 
-    private long recipient;
+    private final long recipient;
 
-    private MessageContent content;
+    private final MessageContent content;
 
     @JsonCreator
     public SendMessageRequest(long sender, long recipient, MessageContent content) {

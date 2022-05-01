@@ -1,8 +1,8 @@
 package com.asapp.backend.challenge.application.controllers;
 
-import com.asapp.backend.challenge.application.model.responses.CreateUserResponse;
 import com.asapp.backend.challenge.application.model.data.User;
 import com.asapp.backend.challenge.application.model.requests.CreateUserRequest;
+import com.asapp.backend.challenge.application.model.responses.CreateUserResponse;
 import com.asapp.backend.challenge.application.services.UsersService;
 import com.asapp.backend.challenge.application.transformers.UsersTransformer;
 import com.asapp.backend.challenge.application.utils.Path;
@@ -27,7 +27,7 @@ public class UsersController {
     }
 
     /**
-     * Creates a new User.
+     * Create a user in the system.
      *
      * @param createUserRequest User creation request.
      * @return {@link CreateUserResponse}.

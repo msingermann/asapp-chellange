@@ -24,9 +24,8 @@ public class DefaultAuthService implements AuthService {
 
     private static final String BEARER_PREFIX = "bearer ";
 
-    private UsersRepository usersRepository;
-    private AuthTokenRepository authTokenRepository;
-
+    private final UsersRepository usersRepository;
+    private final AuthTokenRepository authTokenRepository;
 
 
     @Autowired
@@ -56,14 +55,14 @@ public class DefaultAuthService implements AuthService {
     public void validateToken(String authHeaderValue) {
         String token = extractToken(authHeaderValue);
         Optional<AuthToken> authToken = authTokenRepository.findById(token);
-        if(authToken.isEmpty()) {
+        if (authToken.isEmpty()) {
             LOGGER.debug("Authorization token is not valid or expired.");
             throw new UnauthorizedException();
         }
     }
 
     private String extractToken(String authHeaderValue) {
-        if(StringUtils.startsWithIgnoreCase(authHeaderValue, BEARER_PREFIX)) {
+        if (StringUtils.startsWithIgnoreCase(authHeaderValue, BEARER_PREFIX)) {
             return authHeaderValue.substring(BEARER_PREFIX.length());
         }
         LOGGER.debug("Authorization token is not valid or expired.");

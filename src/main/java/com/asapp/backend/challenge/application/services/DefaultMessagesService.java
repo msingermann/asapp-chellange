@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class DefaultMessagesService implements MessagesService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultMessagesService.class);
-    private MessagesRepository messagesRepository;
+    private final MessagesRepository messagesRepository;
 
     @Autowired
     public DefaultMessagesService(MessagesRepository messagesRepository) {
@@ -39,6 +39,7 @@ public class DefaultMessagesService implements MessagesService {
 
     /**
      * {@inheritDoc}
+     *
      * @return
      */
     @Override

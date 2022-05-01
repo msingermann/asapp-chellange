@@ -72,7 +72,7 @@ public class IntegrationTests {
 
     protected Message createImageMessage(long sender, long recipient) {
         Map<String, Object> imageMetadata = new HashMap<>();
-        imageMetadata.put("url", "http://urlloca.com");
+        imageMetadata.put("url", "http://youtube.com/video");
         imageMetadata.put("width", 640);
         imageMetadata.put("height", 480);
 
@@ -81,7 +81,7 @@ public class IntegrationTests {
 
     protected Message createVideoMessage(long sender, long recipient) {
         Map<String, Object> videoMetadata = new HashMap<>();
-        videoMetadata.put("url", "http://urlloca.com");
+        videoMetadata.put("url", "http://youtube.com/video");
         videoMetadata.put("source", "youtube");
         return this.createMessage(sender, recipient, "VIDEO", videoMetadata);
     }

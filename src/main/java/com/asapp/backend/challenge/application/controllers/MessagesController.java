@@ -45,10 +45,10 @@ public class MessagesController {
 
     /**
      * Fetch all existing messages to a given recipient, within a range of message IDs.
-
+     *
      * @param recipient User ID of recipient.
-     * @param start Starting message ID. Messages will be returned in increasing order of message ID, starting from this value (or the next lowest value stored in the database).
-     * @param limit Limit the response to this many messages (Default = 100).
+     * @param start     Starting message ID. Messages will be returned in increasing order of message ID, starting from this value (or the next lowest value stored in the database).
+     * @param limit     Limit the response to this many messages (Default = 100).
      * @return List of {@link Message}.
      */
     @RequestMapping(value = Path.MESSAGES, method = RequestMethod.GET)

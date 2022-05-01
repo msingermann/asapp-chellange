@@ -15,7 +15,7 @@ import java.util.Optional;
 public class DefaultUsersService implements UsersService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultUsersService.class);
-    private UsersRepository usersRepository;
+    private final UsersRepository usersRepository;
 
     @Autowired
     public DefaultUsersService(UsersRepository usersRepository) {
@@ -28,7 +28,7 @@ public class DefaultUsersService implements UsersService {
     @Transactional
     public User createUser(String name, String password) {
         Optional<User> previousUserWithThatName = usersRepository.findByName(name);
-        if(previousUserWithThatName.isPresent()) {
+        if (previousUserWithThatName.isPresent()) {
             LOGGER.error("Name " + name + " Already taken.");
             throw new NameAlreadyTakenException("Name " + name + " is already taken.");
         }

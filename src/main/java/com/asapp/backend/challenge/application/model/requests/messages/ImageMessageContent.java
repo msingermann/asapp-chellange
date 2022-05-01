@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ImageMessageContent extends MessageContent {
 
-    private Map<String, Object> metadata;
+    private final Map<String, Object> metadata;
 
     @JsonCreator
     public ImageMessageContent(
