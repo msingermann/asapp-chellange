@@ -3,20 +3,9 @@ spring:
     url: 'jdbc:sqlite:memory:test.db'
     username: ''
     password: ''
-    hikari:
-      auto-commit: false
-#      maximum-pool-size: 10
-#      minimum-idle: 5
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.sqlite.hibernate.dialect.SQLiteDialect
   sql:
     init:
       mode: always
-server:
-  error:
-    include-message: always
 
 #logging:
 #  level:

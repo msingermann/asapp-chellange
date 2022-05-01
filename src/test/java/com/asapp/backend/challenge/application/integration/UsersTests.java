@@ -21,16 +21,16 @@ public class UsersTests extends IntegrationTests {
     }
 
     @Test
-    public void nameAlreadyTaken() {
-        String name = "usertaken";
-        CreateUserRequest payload = new CreateUserRequest(name, "pa$$word");
+    public void usernameAlreadyTaken() {
+        String username = "usertaken";
+        CreateUserRequest payload = new CreateUserRequest(username, "pa$$word");
         RestAssured.given().port(port).contentType(ContentType.JSON).given().body(payload).post(Path.USERS).then()
                 .statusCode(HttpStatus.SC_OK)
                 .and().body("id", notNullValue());
 
         RestAssured.given().port(port).contentType(ContentType.JSON).given().body(payload).post(Path.USERS).then()
                 .statusCode(HttpStatus.SC_BAD_REQUEST)
-                .and().body("message", is("Name " + name + " is already taken."));
+                .and().body("message", is("Name " + username + " is already taken."));
     }
 
 }

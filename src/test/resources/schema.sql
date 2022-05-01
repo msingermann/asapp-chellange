@@ -1,11 +1,11 @@
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name varchar(255) NOT NULL UNIQUE,
+    username varchar(255) NOT NULL UNIQUE,
     password varchar(255) NOT NULL
 );
 -- An INTEGER PRIMARY KEY becomes the actual key used in the B-tree that stores your table. So no index is required for efficient operation.
 CREATE UNIQUE INDEX IF NOT EXISTS name_index
-    ON users(name);
+    ON users(username);
 
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

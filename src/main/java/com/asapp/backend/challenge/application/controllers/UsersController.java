@@ -35,7 +35,7 @@ public class UsersController {
     @RequestMapping(value = Path.USERS, method = RequestMethod.POST)
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody CreateUserRequest createUserRequest) {
         LOGGER.debug("Create Users request received.");
-        User user = usersService.createUser(createUserRequest.getName(), createUserRequest.getPassword());
+        User user = usersService.createUser(createUserRequest.getUsername(), createUserRequest.getPassword());
         return ResponseEntity.ok().body(UsersTransformer.transform(user));
     }
 

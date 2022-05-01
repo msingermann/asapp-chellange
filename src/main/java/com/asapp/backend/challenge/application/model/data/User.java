@@ -24,8 +24,8 @@ public class User {
     /**
      * User Name (must be unique).
      */
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "username", nullable = false)
+    private String username;
 
     /**
      * User Password Hashed.
@@ -33,9 +33,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    public User(String name, String password) {
+    public User(String username, String password) {
         super();
-        this.name = name;
+        this.username = username;
         this.password = password;
     }
 
@@ -46,8 +46,8 @@ public class User {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {

@@ -26,15 +26,15 @@ public class DefaultUsersService implements UsersService {
      * {@inheritDoc}
      */
     @Transactional
-    public User createUser(String name, String password) {
-        Optional<User> previousUserWithThatName = usersRepository.findByName(name);
+    public User createUser(String username, String password) {
+        Optional<User> previousUserWithThatName = usersRepository.findByUsername(username);
         if (previousUserWithThatName.isPresent()) {
-            LOGGER.error("Name %s is already taken.", name);
-            throw new NameAlreadyTakenException("Name " + name + " is already taken.");
+            LOGGER.error("Name %s is already taken.", username);
+            throw new NameAlreadyTakenException("Name " + username + " is already taken.");
         }
-        User user = new User(name, password);
+        User user = new User(username, password);
         User persistedUser = usersRepository.save(user);
-        LOGGER.debug("User id: %s, name: %s created.", persistedUser.getId(), persistedUser.getName());
+        LOGGER.debug("User id: %s, name: %s created.", persistedUser.getId(), persistedUser.getUsername());
         return user;
     }
 }

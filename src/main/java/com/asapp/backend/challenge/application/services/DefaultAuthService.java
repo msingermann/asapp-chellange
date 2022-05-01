@@ -39,9 +39,9 @@ public class DefaultAuthService implements AuthService {
      * {@inheritDoc}
      */
     public LoginResponse login(LoginRequest loginRequest) {
-        Optional<User> maybeUser = usersRepository.findByNameAndPassword(loginRequest.getName(), loginRequest.getPassword());
+        Optional<User> maybeUser = usersRepository.findByUsernameAndPassword(loginRequest.getUsername(), loginRequest.getPassword());
         if (maybeUser.isEmpty() || !maybeUser.get().getPassword().equals(loginRequest.getPassword())) {
-            LOGGER.debug("Login failed. Wrong user or password. User: %s, exists: %s", loginRequest.getName(), maybeUser.isPresent());
+            LOGGER.debug("Login failed. Wrong user or password. User: %s, exists: %s", loginRequest.getUsername(), maybeUser.isPresent());
             throw new LoginFailedException("Wrong User or Password");
         }
 

@@ -1,28 +1,21 @@
 spring:
   datasource:
-#    url: jdbc:h2:mem:testdb
-#    username: 'sa'
-#    password: 'password'
-#    driverClassName: org.h2.Driver
-    url: 'jdbc:sqlite:/Users/msingermann/Downloads/sqlite-tools-osx-x86-3380300/test.db2'
-    username: ''
-    password: ''
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     hikari:
       auto-commit: false
-#      maximum-pool-size: 1
-#      max-lifetime: 0
+#      maximum-pool-size: 10
+#      minimum-idle: 10
   jpa:
-#    database-platform: org.hibernate.dialect.H2Dialect
     properties:
       hibernate:
         dialect: org.sqlite.hibernate.dialect.SQLiteDialect
-hibernate:
-  dialect: org.sqlite.hibernate.dialect.SQLiteDialect
+
 server:
   error:
     include-message: always
 
-#
 #logging:
 #  level:
 #    org:
@@ -32,4 +25,3 @@ server:
 #          descriptor:
 #            sql:
 #              BasicBinder: TRACE
-#
