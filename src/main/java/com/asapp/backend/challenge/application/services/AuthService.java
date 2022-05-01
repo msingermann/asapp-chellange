@@ -16,4 +16,6 @@ public interface AuthService {
      */
     LoginResponse login(LoginRequest loginRequest);
 
+    void validateToken(String authHeaderValue);
+
 }

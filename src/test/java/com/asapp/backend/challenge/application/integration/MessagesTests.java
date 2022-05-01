@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -28,8 +29,7 @@ public class MessagesTests extends IntegrationTests {
         User user1 = createUser("User1", "pass1");
         User user2 = createUser("User2", "pass2");
 
-        //TODO get token from database (or add it manually)
-        String token = "bearer 1234";
+        String token = createToken(user1.getId());
 
         TextMessageContent textMessage = new TextMessageContent("Hello!");
 
@@ -45,8 +45,7 @@ public class MessagesTests extends IntegrationTests {
         User user1 = createUser("User1", "pass1");
         User user2 = createUser("User2", "pass2");
 
-        //TODO get token from database (or add it manually)
-        String token = "bearer 1234";
+        String token = createToken(user1.getId());
 
         ImageMessageContent imageMessage = new ImageMessageContent("http://urlloca.com", 640, 480);
 
@@ -62,8 +61,7 @@ public class MessagesTests extends IntegrationTests {
         User user1 = createUser("User1", "pass1");
         User user2 = createUser("User2", "pass2");
 
-        //TODO get token from database (or add it manually)
-        String token = "bearer 1234";
+        String token = createToken(user1.getId());
 
         VideoMessageContent videoMessage = new VideoMessageContent("http://urlloca.com", "youtube");
 
@@ -87,8 +85,7 @@ public class MessagesTests extends IntegrationTests {
             messages.add(createVideoMessage(user1.getId(), user2.getId()));
         }
 
-        //TODO get token from database (or add it manually)
-        String token = "bearer 1234";
+        String token = createToken(user1.getId());
 
         int limit = 5;
 

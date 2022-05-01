@@ -25,7 +25,7 @@ public class Message {
      * Message Id.
      */
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**
@@ -57,7 +57,7 @@ public class Message {
      */
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "timestamp")
+    @Column(name = "timestamp", insertable = false)
     private Date timestamp;
 
     public Message() {

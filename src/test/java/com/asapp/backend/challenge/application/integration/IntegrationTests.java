@@ -1,9 +1,11 @@
 package com.asapp.backend.challenge.application.integration;
 
 import com.asapp.backend.challenge.application.Application;
+import com.asapp.backend.challenge.application.model.data.AuthToken;
 import com.asapp.backend.challenge.application.model.data.Message;
 import com.asapp.backend.challenge.application.model.data.User;
 import com.asapp.backend.challenge.application.model.requests.CreateUserRequest;
+import com.asapp.backend.challenge.application.repositories.AuthTokenRepository;
 import com.asapp.backend.challenge.application.repositories.MessagesRepository;
 import com.asapp.backend.challenge.application.repositories.UsersRepository;
 import com.asapp.backend.challenge.application.utils.MapToJsonConverter;
@@ -11,6 +13,7 @@ import com.asapp.backend.challenge.application.utils.Path;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -19,6 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -35,6 +39,20 @@ public class IntegrationTests {
     @Autowired
     private MessagesRepository messagesRepository;
 
+    @Autowired
+    private AuthTokenRepository authTokenRepository;
+
+    @AfterEach
+    public void cleanUp() {
+        usersRepository.deleteAll();
+        messagesRepository.deleteAll();
+        authTokenRepository.deleteAll();
+    }
+
+    protected String createToken(long userId) {
+        AuthToken token = new AuthToken(UUID.randomUUID().toString(), userId);
+        return "bearer " + authTokenRepository.save(token).getToken();
+    }
     protected User createUser(String name, String password) {
         User user = new User(name, password);
         usersRepository.save(user);
