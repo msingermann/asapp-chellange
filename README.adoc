@@ -1,0 +1,37 @@
+= ASAPP Coding Challenge - Chat
+
+Coding challeng for ASAPP made with Springboot.
+
+Decisions taken:
+
+- move out of Spark as it is not updated since Nov 18, 2020 (https://github.com/perwendel/spark)
+- Use Maven instead of Gradle. As i was starting the project from scratch i prefeer to use maven that i am more familiar with so i don't have to waste time dealing with gradle.
+
+
+
+== Build And Run
+
+Build jar with Maven wrapper
+
+ ./mvn clean package
+
+Build image with docker
+
+ docker build -t app .
+
+Run in docker
+
+ docker run -p 8080:8080 app
+
+Deploy in k8s
+
+ kubectl apply -f ./k8s/deployment.yaml
+
+port forward to the service
+
+ kubectl port-forward svc/chat 8080:80
+
+Then curl into it
+
+ curl -X POST 'localhost:8080/check'
+ {"health":"OK"}%
