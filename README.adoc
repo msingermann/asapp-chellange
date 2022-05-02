@@ -15,29 +15,33 @@ Decisions taken:
 
 Build jar with Maven wrapper
 
- ./mvn clean package
+ ./mvnw clean package
 
 Build image with docker
 
- docker build -t app .
+ docker build -t chat:1.0.0 .
 
 Run in docker
 
- docker run -p 8080:8080 app
+ docker run -p 8080:8080 chat
 
 === Deploy in k8s
 
-This will create a SQLite database pod to simulate the DB. You can always comment that from the manifest and configure a different database URL in the Chat ConfigMap.
+This will use an in memory SQLite DB by default.
 
-1st You need to manually create the configmap with `schema.sql` to init the database created in a pod.
+If you are using `kind` to create a local cluster just create one with this command
 
- kubectl create configmap schema --from-file=./src/test/resources/schema.sql
+ kind create cluster --image=kindest/node:v1.17.5
+
+Remember to send to kind the image of the application and the database.
+
+ kind load docker-image chat:1.0.0
 
 Then deploy the manifest
 
  kubectl apply -f ./k8s/deployment.yaml
 
-port forward to the service
+port forward to the chat service
 
  kubectl port-forward svc/chat 8080:80
 

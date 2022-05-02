@@ -1,3 +1,25 @@
+# This are not the actual secrets and user but i leave the config, so it can be added if needed later.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chat-secrets
+type: Opaque
+data:
+  username: YWRtaW4=
+  password: YWRtaW4=
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chat-config
+data:
+  DATABASE_URL: "jdbc:sqlite:memory:chat.db"
+  LD_BIND_NOW: "1"
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,7 +27,7 @@ metadata:
   labels:
     app: chat
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: chat
@@ -17,7 +39,7 @@ spec:
       containers:
         - name: chat
           imagePullPolicy: Never
-          image: app:1.0.0
+          image: chat:1.0.0
           ports:
             - containerPort: 8080
           envFrom:
@@ -25,7 +47,6 @@ spec:
                 name: chat-secrets
             - configMapRef:
                 name: chat-config
-
 
 ---
 
@@ -43,75 +64,3 @@ spec:
       targetPort: 8080
 
 ---
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: chat-secrets
-type: Opaque
-data:
-  username: YWRtaW4=
-  password: YWRtaW4=
-
----
-
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: chat-config
-data:
-  DATABASE_URL: "jdbc:sqlite:sqlite.svc/chat.db"
-
----
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: sqlite
-  labels:
-    app: sqlite
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: sqlite
-  template:
-    metadata:
-      labels:
-        app: sqlite
-    spec:
-      containers:
-        - name: sqlite
-          imagePullPolicy: Never
-          image: keinos/sqlite3:3.38.2
-          command:
-            - sh
-            - -c
-            - "sqlite3 chat.db < /tmp/schemas/schema.sql"
-          ports:
-            - containerPort: 80
-          volumeMounts:
-            - mountPath: /tmp/schemas
-              name: schema-config
-      volumes:
-        - name: schema-config
-          configMap:
-            name: schema
-            items:
-              - key: schema.sql
-                path: schema.sql
-
----
-
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: sqlite
-spec:
-  selector:
-    app: sqlite
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80

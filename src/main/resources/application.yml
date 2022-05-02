@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${DATABASE_URL}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL:jdbc:sqlite:memory:chat.db}
+    username: ${DATABASE_USERNAME:}
+    password: ${DATABASE_PASSWORD:}
     hikari:
       auto-commit: false
 #      maximum-pool-size: 10
@@ -11,6 +11,9 @@ spring:
     properties:
       hibernate:
         dialect: org.sqlite.hibernate.dialect.SQLiteDialect
+  sql:
+    init:
+      mode: always
 
 server:
   error:
