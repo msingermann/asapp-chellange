@@ -7,7 +7,7 @@ Decisions taken:
 - Move out of Spark as it is not updated since Nov 18, 2020 (https://github.com/perwendel/spark)
 - Use Springboot instead as it is a widely used framework easily to maintain, with the latest security updates, and out of the box features like pooling, dependency injection, etc.
 - Use Maven instead of Gradle. As I was starting the project from scratch I prefer to use maven that I am more familiar with, so I don't have to waste time dealing with gradle now.
-- Save the Message Content as metadata in a VARCHAR column as a JsonString. This way I can add new kind of messages without having to change anything in the database and keep the model simple enough for the use case. I would prefer using a PostgreSQL database and use a JSONB column for this instead of SQLite, but I think I already changed too many things from the original request, so I tried to make it work with SQLite.
+- [.line-through]#Save the Message Content as metadata in a VARCHAR column as a JsonString. This way I can add new kind of messages without having to change anything in the database and keep the model simple enough for the use case. I would prefer using a PostgreSQL database and use a JSONB column for this instead of SQLite, but I think I already changed too many things from the original request, so I tried to make it work with SQLite.# Changed it to use a PostgreSQL database as SQLite is not a good option to a distributed system. Add TestContainers to simulate it in the tests and a pod with Postgre image to simulate an external db in the k8s deployment. Didn't make time to change the Message Content into a JSONB, that should be the next step.
 - Keep AuthTokens in the same DB and don't use a Redis for this. I know is way better/faster use a redis to persist the tokens but considering the effort and the time given I choose to keep the tokens in the same DB in a new table to avoid the implementation cost of a Redis. (Keep it simple)
 - Considered using a Signed JWT for the auth token so i could avoid persist it but that takes out the possibility of a logout and token invalidation (not implemented yet).
 
@@ -27,7 +27,7 @@ Run in docker
 
 === Deploy in k8s
 
-This will use an in memory SQLite DB by default.
+This uses a postgres pod to simulate the external db.
 
 If you are using `kind` to create a local cluster just create one with this command
 
@@ -37,6 +37,11 @@ Remember to send to kind the image of the application and the database.
 
  kind load docker-image chat:1.0.0
 
+Pull and load postgres image.
+
+ docker pull postgres:14.2
+ kind load docker-image postgres:14.2
+
 Then deploy the manifest
 
  kubectl apply -f ./k8s/deployment.yaml
@@ -45,7 +50,7 @@ port forward to the chat service
 
  kubectl port-forward svc/chat 8080:80
 
-Then curl into it
+Now you can try it!
 
  curl -X POST 'localhost:8080/check'
  {"health":"OK"}%
