@@ -1,12 +1,3 @@
-spring:
-  datasource:
-    url: 'jdbc:sqlite:memory:test.db'
-    username: ''
-    password: ''
-  sql:
-    init:
-      mode: always
-
 #logging:
 #  level:
 #    org:

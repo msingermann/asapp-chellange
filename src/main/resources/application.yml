@@ -1,16 +1,16 @@
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:sqlite:memory:chat.db}
-    username: ${DATABASE_USERNAME:}
-    password: ${DATABASE_PASSWORD:}
+    url: ${DATABASE_URL:jdbc:postgresql://postgres.default.svc:5432/postgres}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
     hikari:
       auto-commit: false
-#      maximum-pool-size: 10
-#      minimum-idle: 10
+  #      maximum-pool-size: 10
+  #      minimum-idle: 10
   jpa:
     properties:
       hibernate:
-        dialect: org.sqlite.hibernate.dialect.SQLiteDialect
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
   sql:
     init:
       mode: always

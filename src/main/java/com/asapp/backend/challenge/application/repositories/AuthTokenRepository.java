@@ -11,6 +11,6 @@ public interface AuthTokenRepository extends CrudRepository<AuthToken, String> {
 
     @Override
     @Transactional(readOnly = true)
-    @Query(value = "SELECT * FROM tokens WHERE token = (:uuid) AND timestamp >= datetime('now', '-1 Hour') ", nativeQuery = true)
+    @Query(value = "SELECT * FROM tokens WHERE token = (:uuid) AND timestamp >= now() - interval '1 hours' ", nativeQuery = true)
     Optional<AuthToken> findById(String uuid);
 }

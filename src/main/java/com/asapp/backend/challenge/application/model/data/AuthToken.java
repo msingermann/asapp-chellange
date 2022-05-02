@@ -16,7 +16,7 @@ public class AuthToken {
     @Id
     private String token;
 
-    @Column(name = "user", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private long user;
 
     @Column(name = "timestamp", insertable = false)

@@ -5,8 +5,7 @@ metadata:
   name: chat-secrets
 type: Opaque
 data:
-  username: YWRtaW4=
-  password: YWRtaW4=
+  POSTGRES_PASSWORD: cGFzc3dvcmQ=
 
 ---
 
@@ -15,8 +14,55 @@ kind: ConfigMap
 metadata:
   name: chat-config
 data:
-  DATABASE_URL: "jdbc:sqlite:memory:chat.db"
-  LD_BIND_NOW: "1"
+  DATABASE_URL: "jdbc:postgresql://postgres.default.svc:5432/postgres"
+#  DATABASE_URL: "jdbc:sqlite:memory:chat.db"
+  POSTGRES_USERNAME: "postgres"
+  POSTGRES_DATABASE: "postgres"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          imagePullPolicy: Never
+          image: postgres:14.2
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: chat-secrets
+            - configMapRef:
+                name: chat-config
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  type: LoadBalancer
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432
 
 ---
 
@@ -27,7 +73,7 @@ metadata:
   labels:
     app: chat
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: chat

@@ -1,7 +1,6 @@
 package com.asapp.backend.challenge.application.integration;
 
 import com.asapp.backend.challenge.application.model.data.User;
-import com.asapp.backend.challenge.application.model.requests.CreateUserRequest;
 import com.asapp.backend.challenge.application.model.requests.LoginRequest;
 import com.asapp.backend.challenge.application.utils.Path;
 import io.restassured.RestAssured;
@@ -24,7 +23,7 @@ public class AuthTests extends IntegrationTests {
                 .and().body("id", notNullValue())
                 .and().body("token", notNullValue());
     }
-    
+
     @Test
     public void loginFail() {
         LoginRequest loginPayload = new LoginRequest("nonexistentUser", "pa$$word");
